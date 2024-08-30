@@ -3,7 +3,13 @@ Spring API Backend Assignment for CPSC 6175
 
 ## Running Locally 
 
-R
+Once running the API locally, navigate to one of the following paths to test:
+|Path | Description|
+|----|---|
+|http://127.0.0.1:8080/random|Gets a random joke |
+|http://127.0.0.1:8080/types|Gets all joke types|
+|http://127.0.0.1:8080/random?type=dad|Gets a random joke that has a type = "dad"|
+
 
 ## Assignment Details
 Create a new spring project with Gradle that connects to the [joke api](https://github.com/15Dkatz/official_joke_api?tab=readme-ov-file).

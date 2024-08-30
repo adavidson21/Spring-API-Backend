@@ -4,5 +4,6 @@ import com.jokeApi.jokeApi.domain.JokeResponse;
 
 public interface JokeService {
     JokeResponse getRandomJoke();
-
+    JokeResponse getRandomJoke(String type);
+    String[] getJokeTypes();
 }

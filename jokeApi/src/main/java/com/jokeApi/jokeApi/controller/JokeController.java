@@ -4,6 +4,7 @@ import com.jokeApi.jokeApi.domain.JokeResponse;
 import com.jokeApi.jokeApi.service.joke.JokeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,8 +13,16 @@ public class JokeController {
     private JokeService jokeService;
 
     @GetMapping("/random")
-    public JokeResponse getJoke() {
-        return jokeService.getRandomJoke();
+    public JokeResponse getJoke(@RequestParam(value = "type", required = false) String type) {
+        if(type != null && !type.isEmpty()){
+            return jokeService.getRandomJoke(type);
+        } else{
+            return jokeService.getRandomJoke();
+        }
     }
 
+    @GetMapping("/types")
+    public String[] getJokeTypes(){
+        return jokeService.getJokeTypes();
+    }
 }

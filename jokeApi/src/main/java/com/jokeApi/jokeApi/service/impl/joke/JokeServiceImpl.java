@@ -13,4 +13,17 @@ public class JokeServiceImpl implements JokeService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject("https://official-joke-api.appspot.com/random_joke", JokeResponse.class);
     }
+
+    @Override
+    public JokeResponse getRandomJoke(String type) {
+        RestTemplate restTemplate = new RestTemplate();
+        JokeResponse[] jokes = restTemplate.getForObject("https://official-joke-api.appspot.com/jokes/" + type + "/random", JokeResponse[].class);
+        return (jokes != null && jokes.length > 0) ? jokes[0] : null;
+    }
+
+    @Override
+    public String[] getJokeTypes(){
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("https://official-joke-api.appspot.com/types", String[].class);
+    }
 }
