@@ -1,6 +1,9 @@
 # Spring-API-Backend
 Spring API Backend Assignment for CPSC 6175
 
+## Running Locally 
+
+R
 
 ## Assignment Details
 Create a new spring project with Gradle that connects to the [joke api](https://github.com/15Dkatz/official_joke_api?tab=readme-ov-file).
@@ -12,7 +15,7 @@ Connect to the following API endpoints:
     - Where "programming" in the url can be one of the types from the prior API (so it will be a path parameter).
 
 Controller should contain 3 endpoints:
-1. Types of jokes
+1. Types of jokes 
 2. Random joke 
 3. Random joke by type
 
