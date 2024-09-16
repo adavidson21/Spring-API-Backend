@@ -35,3 +35,11 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### react ###
+.DS_*
+logs
+**/*.backup.*
+**/*.back.*
+
+src/main/react/node_modules
