@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppContainer from "./containers/AppContainer";
 import ComicTypesContainer from "./containers/ComicTypesContainer";
 import AboutContainer from "./containers/AboutContainer";
+import HomeContainer from "./containers/HomeContainer";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Home Page</div>,
+        element: <HomeContainer />,
       },
       {
         path: "comicTypes",

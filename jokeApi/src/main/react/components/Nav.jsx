@@ -18,13 +18,13 @@ const Nav = (props) => {
     },
   ];
   return (
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+    <nav className="navbar navbar-expand-lg">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">
           Navigation Bar
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -32,10 +32,10 @@ const Nav = (props) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
             {pageUrls.map((linkInfo, index) => {
               return (
                 <li key={index} className="nav-item">
