@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDom from "react-dom";
+import ReactDom from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppContainer from "./containers/AppContainer";
 import JokeTypesContainer from "./containers/JokeTypesContainer";
