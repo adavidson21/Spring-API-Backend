@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useStore } from "../createStore";
 import JokeView from "../components/JokeView";
 import { fetchRandomJoke } from "../services/apiService";
+import JokeButton from "../components/JokeButton";
 
 const JokeTypesContainer = () => {
   const { jokeTypes, fetchJokeTypes } = useStore();
@@ -81,23 +82,17 @@ const JokeTypesContainer = () => {
         </div>
       )}
 
-      {/* Buttons */}
-      <div className="d-flex justify-content-center">
-        <button
-          className="btn btn-primary me-2"
-          onClick={fetchJoke}
-          disabled={!selectedType} // Disable if no type is selected
-        >
-          Fetch {selectedType ? selectedType : "Joke"}
-        </button>
+      <JokeButton
+        label={`Fetch ${selectedType ? selectedType : "Joke"}`}
+        onClick={fetchJoke}
+        disabled={!selectedType}
+      />
 
-        {/* Conditionally render Reset button if a type is selected */}
-        {selectedType && (
-          <button className="btn btn-secondary" onClick={resetSelection}>
-            Clear Selection
-          </button>
-        )}
-      </div>
+      {selectedType && (
+        <button className="btn btn-secondary" onClick={resetSelection}>
+          Clear Selection
+        </button>
+      )}
     </div>
   );
 };

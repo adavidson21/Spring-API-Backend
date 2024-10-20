@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import JokeView from "../components/JokeView";
 import axios from "axios";
+import JokeButton from "../components/JokeButton";
 
 export class HomeContainer extends Component {
   constructor(props) {
@@ -15,22 +16,11 @@ export class HomeContainer extends Component {
 
     return (
       <>
-        <div className="container mt-5">
-          <div className="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
-            <div className="col">
-              <div className="card">
-                <div className="card-body">
-                  <h5
-                    className="card-title text-center"
-                    onClick={() => this.randomJokeApiCall()}
-                  >
-                    Get a Random Joke!
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <JokeButton
+          label="Get a Random Joke!"
+          onClick={() => this.randomJokeApiCall()}
+          disabled={false}
+        />
         {joke && <JokeView jokeInfo={joke} />}
       </>
     );
