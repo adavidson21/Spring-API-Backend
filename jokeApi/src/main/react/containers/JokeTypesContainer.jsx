@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useStore } from "../createStore";
-import axios from "axios";
 import JokeView from "../components/JokeView";
+import { fetchRandomJoke } from "../services/apiService";
 
 const JokeTypesContainer = () => {
   const { jokeTypes, fetchJokeTypes } = useStore();
@@ -26,10 +26,8 @@ const JokeTypesContainer = () => {
    */
   const fetchJoke = async () => {
     try {
-      const response = await axios.get("/random", {
-        params: selectedType ? { type: selectedType } : {},
-      });
-      setJoke(response.data);
+      const jokeData = await fetchRandomJoke(selectedType);
+      setJoke(jokeData);
     } catch (error) {
       console.error("Error fetching joke:", error);
     }
