@@ -1,45 +1,82 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { useStore } from "../createStore";
+import axios from "axios";
+import JokeView from "../components/JokeView";
 
-export class JokeTypesContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      types: null,
-    };
+const JokeTypesContainer = () => {
+  const { jokeTypes, fetchJokeTypes } = useStore();
+  const [selectedType, setSelectedType] = useState(null); // track selected joke type
+  const [joke, setJoke] = useState(null); // store the fetched joke
 
-    const jokeTypes = useStore();
+  useEffect(() => {
+    fetchJokeTypes();
+  }, [fetchJokeTypes]);
 
-    useEffect(() => {
-      jokeTypes.fetchJokeTypes();
-    }, []);
-  }
+  /**
+   * Handles the selection of a joke type from the dropdown.
+   * @param type The joke type.
+   */
+  const handleSelectType = (type) => {
+    setSelectedType(type);
+    setJoke(null); // clear previous
+  };
 
-  render() {
-    <div class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Dropdown button
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">
-          Action
-        </a>
-        <a class="dropdown-item" href="#">
-          Another action
-        </a>
-        <a class="dropdown-item" href="#">
-          Something else here
-        </a>
+  /**
+   * Fetches a random joke of the selected type.
+   */
+  const fetchJoke = async () => {
+    try {
+      const response = await axios.get("/random", {
+        params: selectedType ? { type: selectedType } : {},
+      });
+      setJoke(response.data);
+    } catch (error) {
+      console.error("Error fetching joke:", error);
+    }
+  };
+
+  return (
+    <div className="container mt-4">
+      <div className="dropdown">
+        <button
+          className="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Select Joke Type
+        </button>
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {jokeTypes.length > 0 ? (
+            jokeTypes.map((type) => (
+              <a
+                className="dropdown-item"
+                href="#"
+                key={type.name}
+                onClick={() => handleSelectType(type.name)}
+              >
+                {type.name}
+              </a>
+            ))
+          ) : (
+            <p className="dropdown-item">Loading...</p>
+          )}
+        </div>
       </div>
-    </div>;
-  }
-}
+
+      <button
+        className="btn btn-primary mt-3"
+        onClick={fetchJoke}
+        disabled={!selectedType} // Disable if no type selected
+      >
+        Fetch {selectedType} Joke
+      </button>
+
+      {joke && <JokeView jokeInfo={joke} />}
+    </div>
+  );
+};
 
 export default JokeTypesContainer;
