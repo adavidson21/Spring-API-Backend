@@ -2,7 +2,7 @@ import React from "react";
 import ReactDom from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppContainer from "./containers/AppContainer";
-import ComicTypesContainer from "./containers/ComicTypesContainer";
+import JokeTypesContainer from "./containers/JokeTypesContainer";
 import AboutContainer from "./containers/AboutContainer";
 import HomeContainer from "./containers/HomeContainer";
 
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         element: <HomeContainer />,
       },
       {
-        path: "comicTypes",
-        element: <ComicTypesContainer />,
+        path: "jokeTypes",
+        element: <JokeTypesContainer />,
       },
       {
         path: "about",

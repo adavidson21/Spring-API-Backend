@@ -1,21 +1,55 @@
-import React from "react";
+import React, { Component } from "react";
+import JokeView from "../components/JokeView";
+import axios from "axios";
 
-const HomeContainer = () => {
-  return (
-    <>
-      <div class="container mt-5">
-        <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Get a Random Joke!</h5>
+export class HomeContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      joke: null,
+    };
+  }
+
+  render() {
+    const { joke } = this.state;
+
+    return (
+      <>
+        <div className="container mt-5">
+          <div className="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
+            <div className="col">
+              <div className="card">
+                <div className="card-body">
+                  <h5
+                    className="card-title"
+                    onClick={() => this.randomJokeApiCall()}
+                  >
+                    Get a Random Joke!
+                  </h5>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-};
+        {joke && <JokeView jokeInfo={joke} />}
+      </>
+    );
+  }
+
+  randomJokeApiCall = () => {
+    const stateControl = (data) => {
+      this.setState({ joke: data });
+    };
+    axios
+      .get(`/random`)
+      .then(function (response) {
+        stateControl(response.data, "SUCCESS");
+      })
+      .catch(function (error) {
+        stateControl({}, "FAILURE");
+        console.log(error);
+      });
+  };
+}
 
 export default HomeContainer;
