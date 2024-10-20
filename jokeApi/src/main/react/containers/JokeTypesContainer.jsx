@@ -3,6 +3,7 @@ import { useStore } from "../createStore";
 import JokeView from "../components/JokeView";
 import { fetchRandomJoke } from "../services/apiService";
 import JokeButton from "../components/JokeButton";
+import JokeDropdown from "../components/JokeDropdown";
 
 const JokeTypesContainer = () => {
   const { jokeTypes, fetchJokeTypes } = useStore();
@@ -15,7 +16,7 @@ const JokeTypesContainer = () => {
 
   /**
    * Handles the selection of a joke type from the dropdown.
-   * @param {string} type - The selected joke type.
+   * @param type The selected joke type.
    */
   const handleSelectType = (type) => {
     setSelectedType(type);
@@ -44,38 +45,12 @@ const JokeTypesContainer = () => {
 
   return (
     <div className="container mt-4 d-flex flex-column align-items-center">
-      {/* Dropdown */}
-      <div className="dropdown mb-4">
-        <button
-          className="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          style={{ fontSize: "1.25rem", padding: "10px 20px" }} // Emphasizing dropdown size
-        >
-          {selectedType ? `Selected: ${selectedType}` : "Select Joke Type"}
-        </button>
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          {jokeTypes.length > 0 ? (
-            jokeTypes.map((type) => (
-              <a
-                className="dropdown-item"
-                href="#"
-                key={type.name}
-                onClick={() => handleSelectType(type.name)}
-              >
-                {type.name}
-              </a>
-            ))
-          ) : (
-            <p className="dropdown-item">Loading...</p>
-          )}
-        </div>
-      </div>
+      <JokeDropdown
+        jokeTypes={jokeTypes}
+        selectedType={selectedType}
+        onSelectType={handleSelectType}
+      />
 
-      {/* Joke displayed here */}
       {joke && (
         <div className="joke-container text-center my-4">
           <JokeView jokeInfo={joke} />
@@ -83,11 +58,12 @@ const JokeTypesContainer = () => {
       )}
 
       <JokeButton
-        label={`Fetch ${selectedType ? selectedType : "Joke"}`}
+        type={selectedType}
         onClick={fetchJoke}
         disabled={!selectedType}
       />
-
+      <br />
+      <br />
       {selectedType && (
         <button className="btn btn-secondary" onClick={resetSelection}>
           Clear Selection

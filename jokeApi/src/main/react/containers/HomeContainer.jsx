@@ -17,7 +17,7 @@ export class HomeContainer extends Component {
     return (
       <>
         <JokeButton
-          label="Get a Random Joke!"
+          type={null}
           onClick={() => this.randomJokeApiCall()}
           disabled={false}
         />
