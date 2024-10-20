@@ -21,7 +21,7 @@ export class HomeContainer extends Component {
               <div className="card">
                 <div className="card-body">
                   <h5
-                    className="card-title"
+                    className="card-title text-center"
                     onClick={() => this.randomJokeApiCall()}
                   >
                     Get a Random Joke!

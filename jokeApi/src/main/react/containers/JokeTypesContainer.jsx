@@ -9,16 +9,16 @@ const JokeTypesContainer = () => {
   const [joke, setJoke] = useState(null); // store the fetched joke
 
   useEffect(() => {
-    fetchJokeTypes();
+    fetchJokeTypes(); // Fetch joke types on component mount
   }, [fetchJokeTypes]);
 
   /**
    * Handles the selection of a joke type from the dropdown.
-   * @param type The joke type.
+   * @param {string} type - The selected joke type.
    */
   const handleSelectType = (type) => {
     setSelectedType(type);
-    setJoke(null); // clear previous
+    setJoke(null); // Clear previous joke
   };
 
   /**
@@ -33,9 +33,18 @@ const JokeTypesContainer = () => {
     }
   };
 
+  /**
+   * Resets the selected joke type and clears the fetched joke.
+   */
+  const resetSelection = () => {
+    setSelectedType(null);
+    setJoke(null); // Clear the previously fetched joke
+  };
+
   return (
-    <div className="container mt-4">
-      <div className="dropdown">
+    <div className="container mt-4 d-flex flex-column align-items-center">
+      {/* Dropdown */}
+      <div className="dropdown mb-4">
         <button
           className="btn btn-secondary dropdown-toggle"
           type="button"
@@ -43,8 +52,9 @@ const JokeTypesContainer = () => {
           data-bs-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
+          style={{ fontSize: "1.25rem", padding: "10px 20px" }} // Emphasizing dropdown size
         >
-          Select Joke Type
+          {selectedType ? `Selected: ${selectedType}` : "Select Joke Type"}
         </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {jokeTypes.length > 0 ? (
@@ -64,15 +74,30 @@ const JokeTypesContainer = () => {
         </div>
       </div>
 
-      <button
-        className="btn btn-primary mt-3"
-        onClick={fetchJoke}
-        disabled={!selectedType} // Disable if no type selected
-      >
-        Fetch {selectedType} Joke
-      </button>
+      {/* Joke displayed here */}
+      {joke && (
+        <div className="joke-container text-center my-4">
+          <JokeView jokeInfo={joke} />
+        </div>
+      )}
 
-      {joke && <JokeView jokeInfo={joke} />}
+      {/* Buttons */}
+      <div className="d-flex justify-content-center">
+        <button
+          className="btn btn-primary me-2"
+          onClick={fetchJoke}
+          disabled={!selectedType} // Disable if no type is selected
+        >
+          Fetch {selectedType ? selectedType : "Joke"}
+        </button>
+
+        {/* Conditionally render Reset button if a type is selected */}
+        {selectedType && (
+          <button className="btn btn-secondary" onClick={resetSelection}>
+            Clear Selection
+          </button>
+        )}
+      </div>
     </div>
   );
 };

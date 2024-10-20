@@ -6,9 +6,13 @@ const JokeView = (props) => {
 
   return (
     <div className="joke-view alert bg-light mt-4 p-4">
-      <h5 className="text-center">Here's a {jokeInfo.type} joke!</h5>
-      <p className="text-center font-weight-bold">{jokeInfo.setup}</p>
-      <p className="text-center lead punchline">{jokeInfo.punchline}</p>
+      <h4 className="text-center">Here's a {jokeInfo.type} joke!</h4>
+      <br />
+      <br />
+      <h3 className="text-center font-weight-bold">{jokeInfo.setup}</h3>
+      <h2 className="text-center lead punchline">
+        <b>{jokeInfo.punchline}</b>
+      </h2>
     </div>
   );
 };

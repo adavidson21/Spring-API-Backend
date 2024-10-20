@@ -1,8 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Nav = (props) => {
-  const { locationUrl } = props;
+const Nav = () => {
   const pageUrls = [
     {
       url: "/",
@@ -21,7 +20,7 @@ const Nav = (props) => {
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          Navigation Bar
+          Joke Generator
         </a>
         <button
           className="navbar-toggler"
